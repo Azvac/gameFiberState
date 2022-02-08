@@ -1,14 +1,18 @@
 import { Point } from "./Point";
+import { NB_POINTS_MAX } from "../constantes";
 
-export default function Points () {
+/** Crée touts les points sur la map
+ * 
+ * @returns Une liste de tout les points
+ */
+export const Points = ((props) => {
+    const color = props.color;
+    let points = [];
 
-    let points= [];
-
-    // Ajoute 400 points a des position au hasard entre 100 et -100
-    for (var i = 0; i < 400; ++i){
-        points.push(<Point position={[Math.random() * (100 - -100) + -100, 4, Math.random() * (100 - -100) + -100]} key={i}/>);
+    // Ajoute les points a des positions au hasard dans la région alloué
+    for (var i = 0; i < NB_POINTS_MAX; ++i) {
+        points.push(<Point key={i} color={color} />);
     }
 
-    // Pas l'idéale car les item n'on pas de clés uniques
-    return<>{points.map((points, index)=>{return <group key={index}>{points}</group>})}</>;
-}
+    return <>{points.map((points, index) => { return <group key={index}>{points}</group> })}</>;
+});
